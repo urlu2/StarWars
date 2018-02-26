@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+	<div>
+		<div>
+			<h1>Star Wars RPG!</h1>
+		</div>
+
+		<div class="chBox" id="plRowObi" value="obi">
+			<p>Obi-Wan Kenobi</p>
+			<img src="./images/obiwanKenobi.jpg">
+			<p class="obiHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="plRowLuke" value="luke">
+			<p>Luke Skywalker</p>
+			<img src="./images/lukeSkywalker.jpg">
+			<p class="lukeHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="plRowSid" value="sid">
+			<p>Darth Sidious</p>
+			<img src="./images/darthSidius.jpg">
+			<p class="sidHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="plRowDarth" value="darth">
+			<p>Darth Maul</p>
+			<img src="./images/darthMaul.jpg">
+			<p class="darthHealth">HEALTH</p>
+		</div>
+		
+		<h2>Your Character:</h2>
+
+		<div class="chBox" id="chPlRowObi" value="obi">
+			<p>Obi-Wan Kenobi</p>
+			<img src="./images/obiwanKenobi.jpg">
+			<p class="obiHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="chPlRowLuke" value="luke">
+			<p>Luke Skywalker</p>
+			<img src="./images/lukeSkywalker.jpg">
+			<p class="lukeHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="chPlRowSid" value="sid">
+			<p>Darth Sidious</p>
+			<img src="./images/darthSidius.jpg">
+			<p class="sidHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="chPlRowDarth" value="darth">
+			<p>Darth Maul</p>
+			<img src="./images/darthMaul.jpg">
+			<p class="darthHealth">HEALTH</p>
+		</div>
+
+		<h2>Enemies Available To Attack:</h2>
+
+		<div class="chBox" id="enemRowObi" value="obi">
+			<p>Obi-Wan Kenobi</p>
+			<img src="./images/obiwanKenobi.jpg">
+			<p class="obiHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="enemRowLuke" value="luke">
+			<p>Luke Skywalker</p>
+			<img src="./images/lukeSkywalker.jpg">
+			<p class="lukeHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="enemRowSid" value="sid">
+			<p>Darth Sidious</p>
+			<img src="./images/darthSidius.jpg">
+			<p class="sidHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="enemRowDarth" value="darth">
+			<p>Darth Maul</p>
+			<img src="./images/darthMaul.jpg">
+			<p class="darthHealth">HEALTH</p>
+		</div>
+
+		<h2>Fight Section</h2>
+
+		<button type="button" class="attackButton">ATTACK</button>
+
+		<h2>Defender</h2>
+
+		<div class="chBox" id="defRowObi" value="obi">
+			<p>Obi-Wan Kenobi</p>
+			<img src="./images/obiwanKenobi.jpg">
+			<p class="obiHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="defRowLuke" value="luke">
+			<p>Luke Skywalker</p>
+			<img src="./images/lukeSkywalker.jpg">
+			<p class="lukeHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="defRowSid" value="sid">
+			<p>Darth Sidious</p>
+			<img src="./images/darthSidius.jpg">
+			<p class="sidHealth">HEALTH</p>
+		</div>
+		<div class="chBox" id="defRowDarth" value="darth">
+			<p>Darth Maul</p>
+			<img src="./images/darthMaul.jpg">
+			<p class="darthHealth">HEALTH</p>
+		</div>
+		<h4 id="gameMessages"></h4>
+    </div>
+    
+
+    <style>
+body {
+    background: url(./images/SWBG.jpg) no-repeat;
+
+}
+
+.chBox{
+	background: white;
+	display: inline-block;
+	width: 156px;
+	border: solid 2px green;
+}
+
+img {
+	height: 90px;
+	width: 136px;
+	display: block;
+	margin: auto;
+}
+
+p {
+	text-align: center;
+}
+
+</style>
+<script>
+$(document).ready(function() {
+    var obiArray = ["1", true, 120, 8, 8, "obi"];
+    var lukeArray = ["1", true, 100, 5, 5, "luke"];
+    var sidArray = ["1", true, 150, 20, 20, "sid"];
+    var darthArray = ["1", true, 180, 25, 25, "darth"];
+    var gameEnd = false;
+    var gameStart = false;
+    var plName = "";
+    var enemName = "";
+    var chClicked = "";
+    var pGame = false;
+
+function chOnOff() {
+    if (obiArray[0] == "1" && obiArray[1] == true) {
+        $("#plRowObi").css("display", "inline-block")
+    } else {
+        $("#plRowObi").css("display", "none");
+    }
+    if (lukeArray[0] == "1" && lukeArray[1] == true) {
+        $("#plRowLuke").css("display", "inline-block")
+    } else {
+        $("#plRowLuke").css("display", "none");
+    }
+    if (sidArray[0] == "1" && sidArray[1] == true) {
+        $("#plRowSid").css("display", "inline-block")
+    } else {
+        $("#plRowSid").css("display", "none");
+    }
+    if (darthArray[0] == "1" && darthArray[1] == true) {
+        $("#plRowDarth").css("display", "inline-block")
+    } else {
+        $("#plRowDarth").css("display", "none");
+    }
+
+    // character
+    if (obiArray[0] == "2" && obiArray[1] == true) {
+        $("#chPlRowObi").css("display", "inline-block")
+    } else {
+        $("#chPlRowObi").css("display", "none");
+    }
+    if (lukeArray[0] == "2" && lukeArray[1] == true) {
+        $("#chPlRowLuke").css("display", "inline-block")
+    } else {
+        $("#chPlRowLuke").css("display", "none");
+    }
+    if (sidArray[0] == "2" && sidArray[1] == true) {
+        $("#chPlRowSid").css("display", "inline-block")
+    } else {
+        $("#chPlRowSid").css("display", "none");
+    }
+    if (darthArray[0] == "2" && darthArray[1] == true) {
+        $("#chPlRowDarth").css("display", "inline-block")
+    } else {
+        $("#chPlRowDarth").css("display", "none");
+    }
+
+    // available enemies
+    if (obiArray[0] == "3" && obiArray[1] == true) {
+        $("#enemRowObi").css("display", "inline-block")
+    } else {
+        $("#enemRowObi").css("display", "none");
+    }
+    if (lukeArray[0] == "3" && lukeArray[1] == true) {
+        $("#enemRowLuke").css("display", "inline-block")
+    } else {
+        $("#enemRowLuke").css("display", "none");
+    }
+    if (sidArray[0] == "3" && sidArray[1] == true) {
+        $("#enemRowSid").css("display", "inline-block")
+    } else {
+        $("#enemRowSid").css("display", "none");
+    }
+    if (darthArray[0] == "3" && darthArray[1] == true) {
+        $("#enemRowDarth").css("display", "inline-block")
+    } else {
+        $("#enemRowDarth").css("display", "none");
+    }
+
+    // defender
+    if (obiArray[0] == "4" && obiArray[1] == true) {
+        $("#defRowObi").css("display", "inline-block")
+    } else {
+        $("#defRowObi").css("display", "none");
+    }
+    if (lukeArray[0] == "4" && lukeArray[1] == true) {
+        $("#defRowLuke").css("display", "inline-block")
+    } else {
+        $("#defRowLuke").css("display", "none");
+    }
+    if (sidArray[0] == "4" && sidArray[1] == true) {
+        $("#defRowSid").css("display", "inline-block")
+    } else {
+        $("#defRowSid").css("display", "none");
+    }
+    if (darthArray[0] == "4" && darthArray[1] == true) {
+        $("#defRowDarth").css("display", "inline-block")
+    } else {
+        $("#defRowDarth").css("display", "none");
+    }
+    $(".obiHealth").html("Health: " + obiArray[2]);
+    $(".lukeHealth").html("Health: " + lukeArray[2]);
+    $(".sidHealth").html("Health: " + sidArray[2]);
+    $(".darthHealth").html("Health: " + darthArray[2]);
+}
+
+function selectPlayer() {
+    if (plName == "" && enemName == "" && gameEnd == false) {
+        plName = chClicked;
+        switch (plName) {
+            case "obi":
+                obiArray[0] = "2";
+                lukeArray[0] = "3";
+                sidArray[0] = "3";
+                darthArray[0] = "3";
+                break;
+
+            case "luke":
+                obiArray[0] = "3";
+                lukeArray[0] = "2";
+                sidArray[0] = "3";
+                darthArray[0] = "3";
+                break;
+
+            case "sid":
+                obiArray[0] = "3";
+                lukeArray[0] = "3";
+                sidArray[0] = "2";
+                darthArray[0] = "3";
+                break;
+
+            case "darth":
+                obiArray[0] = "3";
+                lukeArray[0] = "3";
+                sidArray[0] = "3";
+                darthArray[0] = "2";
+                break;
+        }
+        chClicked = "";
+    }
+}
+
+function selectDefender() {
+    if (((plName != "" && enemName == "") || pGame == true) && gameEnd == false && chClicked!=plName) {
+        enemName = chClicked;
+        switch (enemName) {
+            case "obi":
+                obiArray[0] = "4";
+                gameStart = true;
+                pGame = false;
+                break;
+
+            case "luke":
+                lukeArray[0] = "4";
+                gameStart = true;
+                pGame = false;
+                break;
+
+            case "sid":
+                sidArray[0] = "4";
+                gameStart = true;
+                pGame = false;
+                break;
+
+            case "darth":
+                darthArray[0] = "4";
+                gameStart = true;
+                pGame = false;
+                break;
+        };
+        chClicked = "";
+        $("#gameMessages").html("");
+    }
+    chOnOff();
+}
+
+function havePlayerOrDefenderLost() {
+    if (plName == "obi" && obiArray[2] <= 0) {
+        youLost();
+    } else if (plName == "luke" && lukeArray[2] <= 0) {
+        youLost();
+    } else if (plName == "sid" && sidArray[2] <= 0) {
+        youLost();
+    } else if (plName == "darth" && darthArray[2] <= 0) {
+        youLost();
+    } else if (enemName == "obi" && obiArray[2] <= 0) {
+        obiArray[1] = false;
+        if (pGame == false) 
+        pGame = true;
+    } else if (enemName == "luke" && lukeArray[2] <= 0) {
+        lukeArray[1] = false;
+        if (pGame == false) 
+        pGame = true;
+    } else if (enemName == "sid" && sidArray[2] <= 0) {
+        sidArray[1] = false;
+        if (pGame == false) 
+        pGame = true;
+    } else if (enemName == "darth" && darthArray[2] <= 0) {
+        darthArray[1] = false;
+        if (pGame == false) 
+        pGame = true;
+    } 
+chOnOff();
+}
+
+function attackTracking() {
+    if (gameStart == true && gameEnd != true && pGame == false) {
+        switch (plName) {
+            case "obi":
+                if (enemName == "luke") {
+                    obiArray[2] -= lukeArray[3];
+                    lukeArray[2] -= obiArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + obiArray[3] + " damage. <br>" + enemName + " attacked you back for " + lukeArray[3] + " damage");
+                    obiArray[3] += obiArray[4];
+                } else if (enemName == "sid") {
+                    obiArray[2] -= sidArray[3];
+                    sidArray[2] -= obiArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + obiArray[3] + " damage. <br>" + enemName + " attacked you back for " + sidArray[3] + " damage");
+                    obiArray[3] += obiArray[4];
+                } else if (enemName == "darth") {
+                    obiArray[2] -= darthArray[3];
+                    darthArray[2] -= obiArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + obiArray[3] + " damage. <br>" + enemName + " attacked you back for " + darthArray[3] + " damage");
+                    obiArray[3] += obiArray[4];
+                } 
+                break;
+
+            case "luke":
+                if (enemName == "obi") {
+                    lukeArray[2] -= obiArray[3];
+                    obiArray[2] -= lukeArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + lukeArray[3] + " damage. <br>" + enemName + " attacked you back for " + obiArray[3] + " damage");
+                    lukeArray[3] += lukeArray[4];
+                } else if (enemName == "sid") {
+                    lukeArray[2] -= sidArray[3];
+                    sidArray[2] -= lukeArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + lukeArray[3] + " damage. <br>" + enemName + " attacked you back for " + sidArray[3] + " damage");
+                    lukeArray[3] += lukeArray[4];
+                } else if (enemName == "darth") {
+                    lukeArray[2] -= darthArray[3];
+                    darthArray[2] -= lukeArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + lukeArray[3] + " damage. <br>" + enemName + " attacked you back for " + darthArray[3] + " damage");
+                    lukeArray[3] += lukeArray[4];
+                } 
+                break;
+
+            case "sid":
+                if (enemName == "obi") {
+                    sidArray[2] -= obiArray[3];
+                    obiArray[2] -= sidArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + sidArray[3] + " damage. <br>" + enemName + " attacked you back for " + obiArray[3] + " damage");
+                    sidArray[3] += sidArray[4];
+                } else if (enemName == "luke") {
+                    sidArray[2] -= lukeArray[3];
+                    lukeArray[2] -= sidArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + sidArray[3] + " damage. <br>" + enemName + " attacked you back for " + lukeArray[3] + " damage");
+                    sidArray[3] += sidArray[4];
+                } else if (enemName == "darth") {
+                    sidArray[2] -= darthArray[3];
+                    darthArray[2] -= sidArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + sidArray[3] + " damage. <br>" + enemName + " attacked you back for " + darthArray[3] + " damage");
+                    sidArray[3] += sidArray[4];
+                } 
+                break;
+
+            case "darth":
+                if (enemName == "obi") {
+                    darthArray[2] -= obiArray[3];
+                    obiArray[2] -= darthArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + darthArray[3] + " damage. <br>" + enemName + " attacked you back for " + obiArray[3] + " damage");
+                    darthArray[3] += darthArray[4];
+                } else if (enemName == "luke") {
+                    darthArray[2] -= lukeArray[3];
+                    lukeArray[2] -= darthArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + darthArray[3] + " damage. <br>" + enemName + " attacked you back for " + lukeArray[3] + " damage");
+                    darthArray[3] += darthArray[4];
+                } else if (enemName == "sid") {
+                    darthArray[2] -= sidArray[3];
+                    sidArray[2] -= darthArray[3];
+                    $("#gameMessages").html("You attacked " + enemName + " for " + darthArray[3] + " damage. <br>" + enemName + " attacked you back for " + sidArray[3] + " damage");
+                    darthArray[3] += darthArray[4];
+                } 
+                break;
+
+                chOnOff()
+        }
+        havePlayerOrDefenderLost();
+    }
+    chOnOff();
+}
+
+function youLost() {
+    gameEnd = true;
+    $("#gameMessages").html("You're a Loser!");
+}
+
+function youWon() {
+    gameEnd = true;
+    $("#gameMessages").html("You Win!");
+}
+
+function youWin() {
+    if (plName=="obi" && (lukeArray[1]==false && sidArray[1]==false && darthArray[1]==false)) {
+        youWon();
+    } else if (plName=="luke" && (obiArray[1]==false && sidArray[1]==false && darthArray[1]==false)) {
+        youWon();
+    } else if (plName=="sid" && (obiArray[1]==false && lukeArray[1]==false && darthArray[1]==false)) {
+        youWon();
+    } else if (plName=="darth" && (obiArray[1]==false && lukeArray[1]==false && sidArray[1]==false)) {
+        youWon();
+    }
+}
+
+chOnOff();
+
+$(".chBox").on("click", function() {
+    console.log("clicked: " + $(this).attr("value"));
+    chClicked = $(this).attr("value");
+
+    selectPlayer();
+
+    selectDefender();
+
+    chOnOff();
+});
+
+$(".attackButton").on("click", function() {
+    attackTracking();
+    youWin();
+    chOnOff();
+});
+
+});
+</script>
+</body>
+</html>
